@@ -1,0 +1,7 @@
+/vendor
+/node_modules
+/firestead
+Homestead.yaml
+Homestead.json
+.env
+.vagrant

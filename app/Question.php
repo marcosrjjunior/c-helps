@@ -1,0 +1,37 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Question extends Model
+{
+    public function answers()
+    {
+        return $this->hasMany('App\Answer')
+            ->orderBy('points', 'desc');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function countPoints()
+    {
+        $votes = 0;
+
+        foreach($this->answers as $answer)
+        {
+            $votes += $answer->points;
+        }
+
+        return $votes;
+    }
+
+    public function countAnswers()
+    {
+        return count($this->answers);
+    }
+
+}
