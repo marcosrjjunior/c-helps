@@ -41,4 +41,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('App\Answer', 'answers_points_user', 'answer_id', 'user_id');
     }
+
+    public function owns($related)
+    {
+        return $this->id == $related->user_id;
+    }
 }
