@@ -11,6 +11,9 @@ Route::group(['prefix' => 'questions'], function () {
 Route::group(['prefix' => 'answers'], function () {
     Route::post('submit', ['as' => 'answers.submit', 'uses' => 'AnswersController@submit']);
     Route::post('{id}/points/submit', ['as' => 'answers.points.submit', 'uses' => 'AnswersController@submitPoints']);
+    Route::get('{id}/edit', ['as' => 'answers.edit', 'uses' => 'AnswersController@edit']);
+    Route::put('{id}/update', ['as' => 'answers.update', 'uses' => 'AnswersController@update']);
+    Route::delete('{id}/delete', ['as' => 'answers.delete', 'uses' => 'AnswersController@delete']);
 });
 
 // Authentication routes...

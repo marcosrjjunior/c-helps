@@ -47,4 +47,23 @@ class AnswersController extends Controller
         return response($answer, '500');
     }
 
+    public function edit($id)
+    {
+        $answer = $this->items->find($id);
+
+        return view('answers.edit', compact('answer'));
+    }
+
+    public function update(AnswerRequest $request)
+    {
+        $item = $this->items->update($request->id, $request->input());
+
+        return redirect()->route('questions.show', $item->question->id);
+    }
+
+    public function delete($id)
+    {
+        return $this->items->delete($id);
+    }
+
 }

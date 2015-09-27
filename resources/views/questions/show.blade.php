@@ -21,10 +21,30 @@
                     },
                     error: function(data)
                     {
-                        alert('You already voted!');
+                        alert('Try vote for another answer or you already voted for this answer');
                     }
                 });
             });
+
+            $('.delete-answer').on('click', function(e) {
+                e.preventDefault();
+
+                if (!confirm('Are you sure?')) return;
+
+                var $this = $(this),
+                    $id   = $this.data('item');
+
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN' : '{!! csrf_token() !!}'},
+                    method: 'DELETE',
+                    url: '/answers/'+$id+'/delete',
+                    success : function(data)
+                    {
+                        $this.closest('[data-id]').remove();
+                    }
+                });
+            });
+
         });
     </script>
 @stop
@@ -66,7 +86,11 @@
                         </div>
                     </div>
 
-                    @include('answers.answers')
+                    <div class="row">
+                        <div class="col-md-9">
+                            @include('answers.answers')
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-9">

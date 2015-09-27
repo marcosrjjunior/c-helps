@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use Gate;
 use App\Answer;
 
 class AnswerRepository implements AnswerRepositoryInterface {
@@ -33,9 +34,12 @@ class AnswerRepository implements AnswerRepositoryInterface {
 	public function update($id, array $input)
 	{
 		$a = Answer::find($id);
+
+		if (Gate::denies('update', $a)) {
+			abort(403);
+		}
+
 		$a->answer = $input['answer'];
-		$a->question_id = $input['question_id'];
-		$a->user_id = auth()->user()->id;
 		$a->save();
 
 		return $a;
@@ -43,17 +47,20 @@ class AnswerRepository implements AnswerRepositoryInterface {
 
 	public function delete($id)
 	{
-		if($q = Answer::find($id))
-		{
-			return $q->delete();
+		$a = Answer::find($id);
+
+		if (Gate::denies('update', $a)) {
+			abort(403);
 		}
 
-		return false;
+		$a->delete();
 	}
 
 	public function verifyPoints($answer)
 	{
-		return (bool) ! $answer->points()->first();
+		$user = auth()->user();
+
+		return (bool) ! $answer->points()->whereUserId($user->id)->first() && ($answer->user_id != $user->id);
 	}
 
 	public function addPoint($answer, $point)
@@ -68,5 +75,4 @@ class AnswerRepository implements AnswerRepositoryInterface {
 
 		return $answer;
 	}
-
 }

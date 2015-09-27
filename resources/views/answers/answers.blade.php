@@ -1,9 +1,5 @@
-<div class="row">
-    <div class="col-md-9">
-        <h4>{!! $question->countAnswers() !!} Answers</h4>
-        <hr>
-    </div>
-</div>
+<h4>{!! $question->countAnswers() !!} Answers</h4>
+<hr>
 
 @foreach($question->answers as $answer)
 <div class="row" data-id="{!! $answer->id !!}">
@@ -20,6 +16,15 @@
         <p>{!! $answer->user->name !!}</p>
         <p>{!! $answer->user->points !!}</p>
     </div>
+    @can('update', $answer)
+    <div class="actions">
+        <a href="{!! route('answers.edit', $answer->id) !!}">
+            <span class="label label-default">edit</span>
+        </a>
+
+        <span data-item="{!! $answer->id !!}" class="label label-default delete-answer">delete</span>
+    </div>
+    @endcan
 </div>
 <hr>
 @endforeach
