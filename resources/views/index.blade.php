@@ -14,6 +14,9 @@
         /*background-color: #3C3C77;*/
         color: #3C3C77;
     }
+    .question .info .count {
+        display: block;
+    }
 </style>
 @stop
 
@@ -32,11 +35,11 @@
                     <div class="row question">
                         <div class="col-md-2 col-sm-3 text-center info">
                             <div class="col-md-6">
-                                <label>{!! $question->countPoints() !!}</label>
+                                <label class="count">{!! $question->countPoints() !!}</label>
                                 <label>Votes</label>
                             </div>
                             <div class="col-md-6 {!! $question->countAnswers() > 1 ? 'answered' : '' !!}">
-                                <label>{!! $question->countAnswers() !!}</label>
+                                <label class="count">{!! $question->countAnswers() !!}</label>
                                 <label>Answers</label>
                             </div>
                         </div>
@@ -47,12 +50,15 @@
                             <div class="row">
                             <div class="col-xs-9">
                                 <h4>
-                                    <span class="label label-default">tags</span>
-                                    <span class="label label-default">tags</span>
-                                    <span class="label label-default">tags</span>
+                                    @foreach($question->tags as $tag)
+                                        <span class="label label-default">{!! $tag->name !!}</span>
+                                    @endforeach
                                 </h4>
                                 <h4>
-                                    <small style="font-family:courier,'new courier';" class="text-muted">{!! $question->created_at->diffForHumans() !!}  • TESTE</small>
+                                    <small style="font-family:courier,'new courier';" class="text-muted">
+                                        {!! $question->created_at->diffForHumans() !!}  •
+                                        <a href="">{!! $question->user->name !!}</a>
+                                    </small>
                                 </h4>
                             </div>
                             <div class="col-xs-3"></div>
