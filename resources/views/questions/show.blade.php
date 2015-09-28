@@ -50,6 +50,7 @@
 @stop
 
 @section('styles')
+<link rel="stylesheet" href="{!! asset('assets/bootstrap-markdown-editor/css/bootstrap-markdown-editor.css') !!}">
 <style>
 .point {
     cursor: pointer;
@@ -58,6 +59,14 @@
 .points {
     display: block;
     margin: -8px 8px;
+}
+.user-info {
+    background-color: #E0EAF1;
+    line-height: 8px;
+    padding: 9px 14px;
+}
+.user-info .pts {
+    font-size: 14px;
 }
 </style>
 @stop
@@ -80,9 +89,16 @@
                     <div class="row">
                         <div class="col-md-9">
                             <p>{!! $question->text !!}</p>
-                            <p>{!! $question->created_at->diffForHumans() !!}</p>
-                            <p>{!! $question->user->name !!}</p>
-                            <p>{!! $question->user->points !!}</p>
+                            <h4>
+                                @foreach($question->tags as $tag)
+                                    <span class="label label-default">{!! $tag->name !!}</span>
+                                @endforeach
+                            </h4>
+                            <div class="user-info pull-right">
+                                <p>asked {!! $question->created_at->diffForHumans() !!}</p>
+                                <a>{!! $question->user->name !!}</a>
+                                <label class="pts">{!! $question->user->points !!}</label>
+                            </div>
                         </div>
                     </div>
 
@@ -112,7 +128,7 @@
                 </div>
             </div>
 
-        </div><!--/col-12-->
+        </div>
     </div>
 </div>
 @stop

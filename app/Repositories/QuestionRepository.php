@@ -27,7 +27,19 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		$q->user_id = auth()->user()->id;
 		$q->save();
 
+		if ($input['tags'])
+		{
+			$this->saveTags($q, $input['tags']);
+		}
+
 		return $q;
+	}
+
+	public function saveTags($model, $tags)
+	{
+		$tags = app('App\Repositories\TagRepositoryInterface')->hasTagsOrCreate($tags);
+
+		$model->tags()->attach($tags);
 	}
 
 	public function update($id, array $input)

@@ -3,20 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\QuestionRepositoryInterface;
+use App\Repositories\TagRepositoryInterface;
 use App\Http\Requests\QuestionRequest;
 
 class QuestionsController extends Controller
 {
     private $items;
+    private $tags;
 
-    public function __construct(QuestionRepositoryInterface $items)
+    public function __construct(QuestionRepositoryInterface $items, TagRepositoryInterface $tags)
     {
         $this->items = $items;
+        $this->tags  = $tags;
     }
 
     public function ask()
     {
-        return view('questions.ask');
+        $tags = $this->tags->all();
+
+        return view('questions.ask', compact('tags'));
     }
 
     public function index()
