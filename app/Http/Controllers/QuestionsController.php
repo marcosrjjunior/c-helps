@@ -47,4 +47,17 @@ class QuestionsController extends Controller
         return view('questions.show', compact('question'));
     }
 
+    public function edit($id)
+    {
+        $question = $this->items->find($id);
+
+        return view('questions.edit', compact('question'));
+    }
+
+    public function update(QuestionRequest $request)
+    {
+        $item = $this->items->update($request->id, $request->input());
+
+        return redirect()->route('questions.show', $item->id);
+    }
 }

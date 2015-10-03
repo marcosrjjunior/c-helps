@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Question;
+use Gate;
 
 class QuestionRepository implements QuestionRepositoryInterface {
 
@@ -35,21 +36,25 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		return $q;
 	}
 
+	public function update($id, array $input)
+	{
+		$a = Question::find($id);
+
+		if (Gate::denies('update', $a)) {
+			abort(403);
+		}
+
+		$a->text = $input['text'];
+		$a->save();
+
+		return $a;
+	}
+
 	public function saveTags($model, $tags)
 	{
 		$tags = app('App\Repositories\TagRepositoryInterface')->hasTagsOrCreate($tags);
 
 		$model->tags()->attach($tags);
-	}
-
-	public function update($id, array $input)
-	{
-		$q = Question::find($id);
-		$q->name = $input['name'];
-		$q->text = $input['text'];
-		$q->save();
-
-		return $q;
 	}
 
 	public function delete($id)

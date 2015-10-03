@@ -23,7 +23,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
 	public function create(array $input)
 	{
 		$a = new Answer;
-		$a->answer = $input['answer'];
+		$a->text = $input['text'];
 		$a->question_id = $input['question_id'];
 		$a->user_id = auth()->user()->id;
 		$a->save();
@@ -39,7 +39,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
 			abort(403);
 		}
 
-		$a->answer = $input['answer'];
+		$a->text = $input['text'];
 		$a->save();
 
 		return $a;

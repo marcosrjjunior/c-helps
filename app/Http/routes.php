@@ -6,6 +6,9 @@ Route::group(['prefix' => 'questions'], function () {
     Route::get('ask', 'QuestionsController@ask');
     Route::post('ask', ['as' => 'questions.submit', 'uses' => 'QuestionsController@submit']);
     Route::get('{id}', ['as' => 'questions.show', 'uses' => 'QuestionsController@show']);
+    Route::get('{id}/edit', ['as' => 'questions.edit', 'uses' => 'QuestionsController@edit']);
+    Route::put('{id}/update', ['as' => 'questions.update', 'uses' => 'QuestionsController@update']);
+    Route::delete('{id}/delete', ['as' => 'questions.delete', 'uses' => 'QuestionsController@delete']);
 });
 
 Route::group(['prefix' => 'answers'], function () {
