@@ -88,6 +88,23 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-9">
+                            @can('update', $question)
+                            <div class="actions pull-right">
+                                <a href="{!! route('questions.edit', $question->id) !!}">
+                                    <span class="label label-default">edit</span>
+                                </a>
+
+                                <span data-item="{!! $question->id !!}" class="label label-default delete-question">delete</span>
+                            </div>
+                            @endcan
+                            @if ($errors->has())
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    @foreach ($errors->all() as $error)
+                                    {{ $error }}<br>
+                                    @endforeach
+                                </div>
+                            @endif
                             <p>{!! $question->text !!}</p>
                             <h4>
                                 @foreach($question->tags as $tag)
@@ -117,7 +134,7 @@
 
                                 <input type="hidden" name="question_id" value="{!! $question->id !!}">
                                 <div class="form-group @if($errors->has('answer')) has-error @endif">
-                                    <textarea rows="7" class="form-control" name="answer"></textarea>
+                                    <textarea rows="7" class="form-control" name="answer" required></textarea>
                                     {!! $errors->first('answer', '<span class="help-block">:message</span>') !!}
                                 </div>
 

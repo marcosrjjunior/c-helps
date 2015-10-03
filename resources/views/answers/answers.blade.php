@@ -10,21 +10,21 @@
             <i data-point="down" class="fa fa-caret-down fa-4x point"></i>
         </div>
     </div>
-    <div class="col-md-9">
-        <p>{!! $answer->answer !!}</p>
+    <div class="col-md-11">
+        @can('update', $answer)
+        <div class="actions pull-right">
+            <a href="{!! route('answers.edit', $answer->id) !!}">
+                <span class="label label-default">edit</span>
+            </a>
+
+            <span data-item="{!! $answer->id !!}" class="label label-default delete-answer">delete</span>
+        </div>
+        @endcan
+        <p>{!! $answer->text !!}</p>
         <p>{!! $answer->created_at->diffForHumans() !!}</p>
         <p>{!! $answer->user->name !!}</p>
         <p>{!! $answer->user->points !!}</p>
     </div>
-    @can('update', $answer)
-    <div class="actions">
-        <a href="{!! route('answers.edit', $answer->id) !!}">
-            <span class="label label-default">edit</span>
-        </a>
-
-        <span data-item="{!! $answer->id !!}" class="label label-default delete-answer">delete</span>
-    </div>
-    @endcan
 </div>
 <hr>
 @endforeach
