@@ -12,7 +12,7 @@ class AnswerRequest extends Request {
     public function rules()
     {
         return [
-            'answer' => 'required',
+            'text' => 'required',
         ];
     }
 

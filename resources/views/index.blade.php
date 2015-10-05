@@ -57,7 +57,7 @@
                                 <h4>
                                     <small style="font-family:courier,'new courier';" class="text-muted">
                                         {!! $question->created_at->diffForHumans() !!}  •
-                                        <a href="">{!! $question->user->name !!}</a>
+                                        <a href="">{!! isset($question->user->exists) ? $question->user->name : 'Deleted user' !!}</a>
                                     </small>
                                 </h4>
                             </div>

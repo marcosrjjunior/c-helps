@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{!! asset('css/default-styles.css') !!}">
         <link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
         @yield('styles')
     </head>
@@ -30,11 +31,19 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-right navbar-nav">
+                        @if(isset(auth()->user()->exists))
+                        <li>
+                            <div class="nav-avatar">
+                                <img src="{!! auth()->user()->avatar!!}">
+                                <label>{!! auth()->user()->points!!}</label>
+                            </div>
+                        </li>
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
                             <ul class="dropdown-menu" style="padding:12px;">
                                 <form class="form-inline">
-                                    <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+                                    <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
                                 </form>
                             </ul>
                         </li>
@@ -47,15 +56,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
-                        <h1>C-Helps
-                            <p class="lead"></p>
-                        </h1>
+                        <a href="/">
+                            <h1>C-Helps
+                                <p class="lead"></p>
+                            </h1>
+                        </a>
                     </div>
                     <div class="col-md-5">
-                        <div class="well well-lg">
+                        <div class="well">
                             <div class="row">
                                 <div class="col-sm-12">
-
+                                    <h2>{!! env('C-HELPS_COMPANY') ? ucwords(env('C-HELPS_COMPANY')) : 'Your Company' !!}</h2>
                                 </div>
                             </div>
                         </div>

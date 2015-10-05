@@ -18,7 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->integer('points');
-            $table->text('picture');
+
+            // Cached from GitHub
+            $table->string('github_id')->unique();
+            $table->string('avatar');
 
             $table->rememberToken();
             $table->timestamps();

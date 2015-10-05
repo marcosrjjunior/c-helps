@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\User;
+use Auth;
+use Exception;
+use Guzzle\Http\Client;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Socialite;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -37,32 +41,79 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Redirect the user to the GitHub authentication page.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Response
      */
-    protected function validator(array $data)
+    public function redirectToProvider()
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+        return Socialite::driver('github')->redirect();
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Obtain the user information from GitHub.
      *
-     * @param  array  $data
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        try {
+            $user = Socialite::driver('github')->user();
+        } catch (Exception $e) {
+            return redirect('auth/github');
+        }
+
+        if ( ! $this->verifyOrganization($user->user['organizations_url'])) {
+            return redirect()->back()->with('company_error', 'You must belong to this company!');
+        }
+
+        $authUser = $this->findOrCreateUser($user);
+
+        Auth::login($authUser, true);
+
+        return redirect('/');
+    }
+
+    public function verifyOrganization($organizationsUrl)
+    {
+        $companies = [];
+        $client = new Client();
+        $response = $client->get($organizationsUrl)->send();
+
+        if ( ! is_array($response->json())) {
+            return false;
+        }
+
+        // Get organizations names
+        foreach($response->json() as $data) {
+            $companies[] = $data['login'];
+        }
+
+        if (in_array(env('C-HELPS_COMPANY'), $companies)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $githubUser
      * @return User
      */
-    protected function create(array $data)
+    private function findOrCreateUser($githubUser)
     {
+        if ($authUser = User::whereGithubId($githubUser->id)->first()) {
+            return $authUser;
+        }
+
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'name'      => $githubUser->name,
+            'email'     => $githubUser->email,
+            'github_id' => $githubUser->id,
+            'avatar'    => $githubUser->avatar
         ]);
     }
+
 }
