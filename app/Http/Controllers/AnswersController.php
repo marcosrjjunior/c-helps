@@ -18,9 +18,7 @@ class AnswersController extends Controller
     {
         $item = $this->items->store($request->id, $request->all());
 
-        session()->flash('flash_message', 'Answer Created!');
-
-        return redirect()->back();
+        return redirect()->back()->with('flash_message', 'Answer Created!');
     }
 
     public function show($id)

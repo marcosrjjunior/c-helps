@@ -50,7 +50,6 @@
 @stop
 
 @section('styles')
-<link rel="stylesheet" href="{!! asset('assets/bootstrap-markdown-editor/css/bootstrap-markdown-editor.css') !!}">
 <style>
 .point {
     cursor: pointer;
@@ -61,12 +60,18 @@
     margin: -8px 8px;
 }
 .user-info {
+    width: 210px;
     background-color: #E0EAF1;
     line-height: 8px;
-    padding: 9px 14px;
+    padding: 12px 6px;
 }
 .user-info .pts {
     font-size: 14px;
+}
+
+.user-info img {
+    border-radius: 3px;
+    width: 30px;
 }
 </style>
 @stop
@@ -113,8 +118,9 @@
                             </h4>
                             <div class="user-info pull-right">
                                 <p>asked {!! $question->created_at->diffForHumans() !!}</p>
-                                <a>{!! $question->user->name !!}</a>
-                                <label class="pts">{!! $question->user->points !!}</label>
+                                <img src="{!! isset($question->user->exists) ? $question->user->avatar : '' !!}">
+                                <a href="">{!! isset($question->user->exists) ? $question->user->name : 'Deleted user' !!}</a>
+                                <label class="pts">{!! isset($question->user->exists) ? $question->user->points : '0' !!}</label>
                             </div>
                         </div>
                     </div>
@@ -133,9 +139,9 @@
                                 <h4>Your Answer</h4>
 
                                 <input type="hidden" name="question_id" value="{!! $question->id !!}">
-                                <div class="form-group @if($errors->has('answer')) has-error @endif">
-                                    <textarea rows="7" class="form-control" name="answer" required></textarea>
-                                    {!! $errors->first('answer', '<span class="help-block">:message</span>') !!}
+                                <div class="form-group @if($errors->has('text')) has-error @endif">
+                                    <textarea rows="7" class="form-control" name="text" required></textarea>
+                                    {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Post Your Answer</button>

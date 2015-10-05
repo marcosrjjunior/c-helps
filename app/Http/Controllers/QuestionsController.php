@@ -35,9 +35,7 @@ class QuestionsController extends Controller
     {
         $item = $this->items->store($request->id, $request->all());
 
-        session()->flash('flash_message', 'Question Created!');
-
-        return redirect()->route('questions.show', $item->id);
+        return redirect()->route('questions.show', $item->id)->with('flash_message', 'Question Created!');
     }
 
     public function show($id)
