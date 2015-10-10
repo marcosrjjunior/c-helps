@@ -1,5 +1,11 @@
 @extends('default')
 
+@section('scripts')
+<script type="text/javascript" src="{!! asset('assets/vuejs/js/vue.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/marked/js/marked.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/editor.js') !!}"></script>
+@stop
+
 @section('page')
 
 <div class="container">
@@ -11,10 +17,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <h3>Question: {!! $question->title !!}</h3>
-                        (old)
                         <div class="row">
                             <div class="col-md-9">
-                                {!! $question->text !!}
+                                <p>{!! \Michelf\Markdown::defaultTransform($question->text) !!}</p>
                                 <hr>
                             </div>
                         </div>
@@ -26,11 +31,19 @@
                             <form method="post" action="{!! route('questions.update', $question->id) !!}">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="_method" value="put" />
-                                <h4>Your Question</h4>
 
-                                <input type="hidden" name="question_id" value="{{-- $question->id --}}">
+                                <div class="form-group @if($errors->has('title')) has-error @endif">
+                                    <label for="title">Text</label>
+                                    <input type="text" class="form-control" name="title" value="{!! $question->title !!}">
+                                    {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+                                </div>
+
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
-                                    <textarea rows="7" class="form-control" name="text">{!! $question->text !!}</textarea>
+                                    <label for="title">Text</label>
+                                    <div id="editor">
+                                        <textarea rows="8" v-model="text" debounce="300" name="text">{!! $question->text !!}</textarea>
+                                        <div v-html="text | marked"></div>
+                                    </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 

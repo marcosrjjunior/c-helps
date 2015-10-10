@@ -1,10 +1,55 @@
-.nav-avatar img {
-    width: 30px;
-    border-radius: 4px;
-    margin-top: 10px;
+#editor {
+    margin: 0;
+    height: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
 }
 
-.nav-avatar label {
-    color: #CCD;
-    font-size: 12px;
+#editor textarea, #editor div {
+    height: 100%;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+#editor textarea {
+    background-color: #f6f6f6;
+    border: none;
+    border-right: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Monaco', courier, monospace;
+    resize: vertical;
+    outline: none;
+    padding: 20px;
+    width: 100%;
+}
+
+#editor code {
+    color: #f66;
+}
+
+.point {
+    cursor: pointer;
+    color: #8E8E8E;
+}
+.points {
+    display: block;
+    margin: -8px 8px;
+}
+
+.user-info {
+    width: 210px;
+    background-color: #E0EAF1;
+    line-height: 8px;
+    padding: 12px 6px;
+}
+.user-info .pts {
+    font-size: 14px;
+}
+
+.user-info img {
+    border-radius: 3px;
+    width: 30px;
 }

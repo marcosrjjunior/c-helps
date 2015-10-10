@@ -1,5 +1,11 @@
 @extends('default')
 
+@section('scripts')
+<script type="text/javascript" src="{!! asset('assets/vuejs/js/vue.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/marked/js/marked.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/editor.js') !!}"></script>
+@stop
+
 @section('page')
 
 <div class="container">
@@ -13,7 +19,7 @@
                         <h3>Question: {!! $answer->question->title !!}</h3>
                         <div class="row">
                             <div class="col-md-9">
-                                {!! $answer->question->text !!}
+                                <p>{!! \Michelf\Markdown::defaultTransform($answer->question->text) !!}</p>
                                 <hr>
                             </div>
                         </div>
@@ -27,9 +33,11 @@
                                 <input type="hidden" name="_method" value="put" />
                                 <h4>Your Answer</h4>
 
-                                <input type="hidden" name="question_id" value="{{-- $question->id --}}">
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
-                                    <textarea rows="7" class="form-control" name="text">{!! $answer->text !!}</textarea>
+                                    <div id="editor">
+                                        <textarea rows="8" v-model="text" debounce="300" name="text">{!! $answer->text !!}</textarea>
+                                        <div v-html="text | marked"></div>
+                                    </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 

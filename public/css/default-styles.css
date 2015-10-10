@@ -21,7 +21,7 @@ footer {
   padding-top:40px;
   padding-bottom:40px;
   background-color:#cecece;
- 
+
 }
 
 
@@ -157,7 +157,18 @@ a,a:hover {
   padding:6px;
   color:#fff;
 }
-    
+
+.nav-avatar img {
+    width: 30px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.nav-avatar label {
+    color: #CCD;
+    font-size: 12px;
+}
+
 .btn-twitter {background-color:#4099FF;color:#fff;}
 .btn-facebook {background-color:#3B5998;color:#fff;}
 .btn-google-plus {background-color:#d34836;color:#fff;}
