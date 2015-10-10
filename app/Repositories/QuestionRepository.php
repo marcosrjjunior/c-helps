@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Question;
+use App\Tag;
 use Gate;
 
 class QuestionRepository implements QuestionRepositoryInterface {
@@ -13,6 +14,11 @@ class QuestionRepository implements QuestionRepositoryInterface {
 	public function find($id)
 	{
 		return Question::find($id);
+	}
+
+	public function byTag($tagId)
+	{
+		return Tag::find($tagId)->questions;
 	}
 
 	public function store($id, array $input)

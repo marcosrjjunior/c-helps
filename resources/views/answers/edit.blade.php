@@ -35,7 +35,7 @@
 
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
                                     <div id="editor">
-                                        <textarea rows="8" v-model="text" debounce="300" name="text">{!! $answer->text !!}</textarea>
+                                        <textarea rows="8" v-model="text" debounce="100" name="text">{!! $answer->text !!}</textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}

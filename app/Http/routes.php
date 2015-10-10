@@ -10,6 +10,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('{id}/edit', ['as' => 'questions.edit', 'uses' => 'QuestionsController@edit']);
         Route::put('{id}/update', ['as' => 'questions.update', 'uses' => 'QuestionsController@update']);
         Route::delete('{id}/delete', ['as' => 'questions.delete', 'uses' => 'QuestionsController@delete']);
+        Route::get('tagged/{tag}', ['as' => 'questions.tagged', 'uses' => 'QuestionsController@byTag']);
     });
 
     Route::group(['prefix' => 'answers'], function () {
