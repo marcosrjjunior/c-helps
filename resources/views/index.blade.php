@@ -5,6 +5,7 @@
     .question h3 {
         margin: 0px;
     }
+
     .question .info {
         margin-top: 20px;
     }
@@ -14,8 +15,13 @@
         /*background-color: #3C3C77;*/
         color: #3C3C77;
     }
+
     .question .info .count {
         display: block;
+    }
+
+    .tags a:focus {
+        text-decoration: none;
     }
 </style>
 @stop
@@ -49,9 +55,11 @@
                             </a>
                             <div class="row">
                             <div class="col-xs-9">
-                                <h4>
+                                <h4 class="tags">
                                     @foreach($question->tags as $tag)
-                                        <span class="label label-default">{!! $tag->name !!}</span>
+                                        <a href="{!! route('questions.tagged', $tag->id) !!}">
+                                            <span class="label label-default">{!! $tag->name !!}</span>
+                                        </a>
                                     @endforeach
                                 </h4>
                                 <h4>

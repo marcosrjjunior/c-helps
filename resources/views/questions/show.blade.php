@@ -123,7 +123,7 @@
                                 <input type="hidden" name="question_id" value="{!! $question->id !!}">
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
                                     <div id="editor">
-                                        <textarea rows="8" v-model="text" debounce="300" name="text"></textarea>
+                                        <textarea rows="8" v-model="text" debounce="100" name="text"></textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}

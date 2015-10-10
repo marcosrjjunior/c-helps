@@ -45,6 +45,13 @@ class QuestionsController extends Controller
         return view('questions.show', compact('question'));
     }
 
+    public function byTag($tagId)
+    {
+        $questions = $this->items->byTag($tagId);
+
+        return view('index', compact('questions'));
+    }
+
     public function edit($id)
     {
         $question = $this->items->find($id);
