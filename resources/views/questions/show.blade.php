@@ -1,79 +1,59 @@
 @extends('default')
 
-@section('scripts')
-    <script>
-        $(function() {
-            $('.point').on('click', function(e) {
-                e.preventDefault();
-
-                var $this   = $(this);
-                    $answer = $this.closest('[data-id]'),
-                    $point   = $this.data('point');
-
-                $.ajax({
-                    headers: {'X-CSRF-TOKEN' : '{!! csrf_token() !!}'},
-                    method: 'POST',
-                    url: '/answers/'+$answer.data('id')+'/points/submit',
-                    data: { point: $point },
-                    success : function(data)
-                    {
-                        $answer.find('.points').text(data.points);
-                    },
-                    error: function(data)
-                    {
-                        alert('Try vote for another answer or you already voted for this answer');
-                    }
-                });
-            });
-
-            $('.delete-answer').on('click', function(e) {
-                e.preventDefault();
-
-                if (!confirm('Are you sure?')) return;
-
-                var $this = $(this),
-                    $id   = $this.data('item');
-
-                $.ajax({
-                    headers: {'X-CSRF-TOKEN' : '{!! csrf_token() !!}'},
-                    method: 'DELETE',
-                    url: '/answers/'+$id+'/delete',
-                    success : function(data)
-                    {
-                        $this.closest('[data-id]').remove();
-                    }
-                });
-            });
-
-        });
-    </script>
+@section('styles')
+<link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
 @stop
 
-@section('styles')
-<style>
-.point {
-    cursor: pointer;
-    color: #8E8E8E;
-}
-.points {
-    display: block;
-    margin: -8px 8px;
-}
-.user-info {
-    width: 210px;
-    background-color: #E0EAF1;
-    line-height: 8px;
-    padding: 12px 6px;
-}
-.user-info .pts {
-    font-size: 14px;
-}
+@section('scripts')
+<script type="text/javascript" src="{!! asset('assets/vuejs/js/vue.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/marked/js/marked.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/editor.js') !!}"></script>
+<script>
+    $(function() {
+        $('.point').on('click', function(e) {
+            e.preventDefault();
 
-.user-info img {
-    border-radius: 3px;
-    width: 30px;
-}
-</style>
+            var $this   = $(this);
+                $answer = $this.closest('[data-id]'),
+                $point   = $this.data('point');
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN' : '{!! csrf_token() !!}'},
+                method: 'POST',
+                url: '/answers/'+$answer.data('id')+'/points/submit',
+                data: { point: $point },
+                success : function(data)
+                {
+                    $answer.find('.points').text(data.points);
+                },
+                error: function(data)
+                {
+                    alert('Try vote for another answer or you already voted for this answer');
+                }
+            });
+        });
+
+        $('.delete-answer').on('click', function(e) {
+            e.preventDefault();
+
+            if (!confirm('Are you sure?')) return;
+
+            var $this = $(this),
+                $id   = $this.data('item');
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN' : '{!! csrf_token() !!}'},
+                method: 'DELETE',
+                url: '/answers/'+$id+'/delete',
+                success : function(data)
+                {
+                    $this.closest('[data-id]').remove();
+                }
+            });
+        });
+
+    });
+</script>
 @stop
 
 @section('page')
@@ -110,7 +90,9 @@
                                     @endforeach
                                 </div>
                             @endif
-                            <p>{!! $question->text !!}</p>
+
+                            <p>{!! \Michelf\Markdown::defaultTransform($question->text) !!}</p>
+
                             <h4>
                                 @foreach($question->tags as $tag)
                                     <span class="label label-default">{!! $tag->name !!}</span>
@@ -140,7 +122,10 @@
 
                                 <input type="hidden" name="question_id" value="{!! $question->id !!}">
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
-                                    <textarea rows="7" class="form-control" name="text" required></textarea>
+                                    <div id="editor">
+                                        <textarea rows="8" v-model="text" debounce="300" name="text"></textarea>
+                                        <div v-html="text | marked"></div>
+                                    </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 

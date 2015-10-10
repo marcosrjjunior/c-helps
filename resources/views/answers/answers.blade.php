@@ -1,4 +1,7 @@
-<h4>{!! $question->countAnswers() !!} Answers</h4>
+@if ($question->countAnswers() != 0)
+    <h4>{!! $question->countAnswers() !!} Answers</h4>
+@endif
+
 <hr>
 
 @foreach($question->answers as $answer)
@@ -20,7 +23,7 @@
             <span data-item="{!! $answer->id !!}" class="label label-default delete-answer">delete</span>
         </div>
         @endcan
-        <p>{!! $answer->text !!}</p>
+        <p>{!! \Michelf\Markdown::defaultTransform($answer->text) !!}</p>
         <div class="user-info pull-right">
             <p>answered {!! $answer->created_at->diffForHumans() !!}</p>
             <img src="{!! isset($answer->user->exists) ? $answer->user->avatar : '' !!}">

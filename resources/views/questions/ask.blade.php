@@ -2,7 +2,9 @@
 
 @section('scripts')
 <script type="text/javascript" src="{!! asset('assets/select2/js/select2.min.js') !!}"></script>
-
+<script type="text/javascript" src="{!! asset('assets/vuejs/js/vue.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('assets/marked/js/marked.min.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/editor.js') !!}"></script>
 <script>
     $(function() {
         $('select').select2({
@@ -14,6 +16,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{!! asset('assets/select2/css/select2.min.css') !!}">
+<link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
 @stop
 
 @section('page')
@@ -44,7 +47,11 @@
                                 </div>
 
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
-                                    <textarea rows="7" class="form-control" name="text"></textarea>
+                                    <label for="title">Text</label>
+                                    <div id="editor">
+                                        <textarea rows="8" v-model="text" debounce="300" name="text"></textarea>
+                                        <div v-html="text | marked"></div>
+                                    </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 
