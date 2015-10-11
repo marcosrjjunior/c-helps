@@ -17,7 +17,6 @@
 #editor textarea {
     background-color: #f6f6f6;
     border: none;
-    border-right: 1px solid #ccc;
     font-size: 14px;
     font-family: 'Monaco', courier, monospace;
     resize: vertical;
@@ -52,4 +51,26 @@
 .user-info img {
     border-radius: 3px;
     width: 30px;
+}
+
+.question h3 {
+    margin: 0px;
+}
+
+.question .info {
+    margin-top: 20px;
+}
+
+.question .answered {
+    /*padding: 7px;*/
+    /*background-color: #3C3C77;*/
+    color: #3C3C77;
+}
+
+.question .info .count {
+    display: block;
+}
+
+.tags a:focus {
+    text-decoration: none;
 }

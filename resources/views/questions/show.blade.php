@@ -1,9 +1,5 @@
 @extends('default')
 
-@section('styles')
-<link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
-@stop
-
 @section('scripts')
 <script type="text/javascript" src="{!! asset('assets/vuejs/js/vue.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('assets/marked/js/marked.min.js') !!}"></script>
@@ -91,7 +87,7 @@
                                 </div>
                             @endif
 
-                            <p>{!! \Michelf\Markdown::defaultTransform($question->text) !!}</p>
+                            <p>{!! \Michelf\MarkdownExtra::defaultTransform($question->text) !!}</p>
 
                             <h4>
                                 @foreach($question->tags as $tag)

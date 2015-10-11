@@ -23,7 +23,7 @@
             <span data-item="{!! $answer->id !!}" class="label label-default delete-answer">delete</span>
         </div>
         @endcan
-        <p>{!! \Michelf\Markdown::defaultTransform($answer->text) !!}</p>
+        <p>{!! \Michelf\MarkdownExtra::defaultTransform($answer->text) !!}</p>
         <div class="user-info pull-right">
             <p>answered {!! $answer->created_at->diffForHumans() !!}</p>
             <img src="{!! isset($answer->user->exists) ? $answer->user->avatar : '' !!}">

@@ -19,7 +19,7 @@
                         <h3>Question: {!! $answer->question->title !!}</h3>
                         <div class="row">
                             <div class="col-md-9">
-                                <p>{!! \Michelf\Markdown::defaultTransform($answer->question->text) !!}</p>
+                                <p>{!! \Michelf\MarkdownExtra::defaultTransform($answer->question->text) !!}</p>
                                 <hr>
                             </div>
                         </div>
