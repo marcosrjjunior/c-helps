@@ -63,7 +63,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
 		return (bool) ! $answer->points()->whereUserId($user->id)->first() && ($answer->user_id != $user->id);
 	}
 
-	public function addPoint($answer, $point)
+	public function updatePoint($answer, $point)
 	{
 		$points = $answer->points;
 
@@ -72,6 +72,10 @@ class AnswerRepository implements AnswerRepositoryInterface {
 		]);
 
 		$answer->points()->attach(auth()->user()->id);
+
+		$answer->user->update([
+			'points' => $point == 'up' ? $answer->user->points + 1 : $answer->user->points - 1
+		]);
 
 		return $answer;
 	}

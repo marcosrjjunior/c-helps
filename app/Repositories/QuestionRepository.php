@@ -3,6 +3,7 @@
 use App\Question;
 use App\Tag;
 use Gate;
+use Maknz\Slack\Client;
 
 class QuestionRepository implements QuestionRepositoryInterface {
 
@@ -44,21 +45,23 @@ class QuestionRepository implements QuestionRepositoryInterface {
 			$this->saveTags($q, $input['tags']);
 		}
 
+		$this->slackMessage($q);
+
 		return $q;
 	}
 
 	public function update($id, array $input)
 	{
-		$a = Question::find($id);
+		$q = Question::find($id);
 
-		if (Gate::denies('update', $a)) {
+		if (Gate::denies('update', $q)) {
 			abort(403);
 		}
 
-		$a->text = $input['text'];
-		$a->save();
+		$q->text = $input['text'];
+		$q->save();
 
-		return $a;
+		return $q;
 	}
 
 	public function saveTags($model, $tags)
@@ -76,5 +79,25 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		}
 
 		return false;
+	}
+
+	public function slackMessage($q)
+	{
+		$client = new Client(env('SLACK_WEBHOOK_URL'), [
+			'username'     => 'c-helps',
+			'channel'      => env('SLACK_CHANNEL'),
+			'icon'         => env('SLACK_ICON'),
+			'unfurl_links' => true,
+			'link_names'   => true,
+		]);
+
+		$client->to(env('SLACK_TO'))->attach([
+		    'fallback'    => 'New question created',
+		    'author_name' => $q->title,
+		    'author_link' => env('C-HELPS_URL') . '/questions/' . $q->id,
+		    'author_icon' => $q->user->avatar,
+		    'color'       => '#010167',
+		    'pretext'     => 'New question created',
+		])->send('');
 	}
 }

@@ -4,7 +4,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'QuestionsController@index');
 
     Route::group(['prefix' => 'questions'], function () {
-        Route::get('ask', 'QuestionsController@ask');
+        Route::get('ask', ['as' => 'questions.ask', 'uses' => 'QuestionsController@ask']);
         Route::post('ask', ['as' => 'questions.submit', 'uses' => 'QuestionsController@submit']);
         Route::get('{id}', ['as' => 'questions.show', 'uses' => 'QuestionsController@show']);
         Route::get('{id}/edit', ['as' => 'questions.edit', 'uses' => 'QuestionsController@edit']);

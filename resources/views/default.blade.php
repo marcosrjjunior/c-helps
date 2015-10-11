@@ -22,12 +22,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="/" class="navbar-brand">Home</a>
                 </div>
                 <nav class="collapse navbar-collapse" role="navigation">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/questions/ask">Ask Question</a>
+                            <a href="{!! route('questions.ask') !!}">Ask Question</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-right navbar-nav">
@@ -65,7 +64,7 @@
                         </a>
                     </div>
                     <div class="col-md-5">
-                        <div class="well">
+                        <div class="well text-center">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h2>{!! env('C-HELPS_COMPANY') ? ucwords(env('C-HELPS_COMPANY')) : 'Your Company' !!}</h2>
@@ -74,15 +73,15 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- /cont -->
+            </div>
 
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="top-spacer"> </div>
+                        <div class="top-spacer"></div>
                     </div>
                 </div>
-            </div><!-- /cont -->
+            </div>
 
         </div>
 

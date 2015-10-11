@@ -1,31 +1,5 @@
 @extends('default')
 
-@section('styles')
-<style>
-    .question h3 {
-        margin: 0px;
-    }
-
-    .question .info {
-        margin-top: 20px;
-    }
-
-    .question .answered {
-        /*padding: 7px;*/
-        /*background-color: #3C3C77;*/
-        color: #3C3C77;
-    }
-
-    .question .info .count {
-        display: block;
-    }
-
-    .tags a:focus {
-        text-decoration: none;
-    }
-</style>
-@stop
-
 @section('page')
 
 <div class="container">
@@ -57,7 +31,7 @@
                             <div class="col-xs-9">
                                 <h4 class="tags">
                                     @foreach($question->tags as $tag)
-                                        <a href="{!! route('questions.tagged', $tag->id) !!}">
+                                        <a href="{!! route('questions.tagged', $tag->name) !!}">
                                             <span class="label label-default">{!! $tag->name !!}</span>
                                         </a>
                                     @endforeach

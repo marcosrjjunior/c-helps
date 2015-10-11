@@ -37,7 +37,7 @@ class AnswersController extends Controller
          */
         if ($this->items->verifyPoints($answer))
         {
-            $answer = $this->items->addPoint($answer, request()->input('point'));
+            $answer = $this->items->updatePoint($answer, request()->input('point'));
 
             return response($answer, '200');
         }

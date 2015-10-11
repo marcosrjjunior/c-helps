@@ -46,6 +46,10 @@ footer {
   min-height:127px;
 }
 
+#masthead .well h2 {
+  font-size: 40px;
+}
+
 #topPanel {
   padding-top:0px;
   padding-left:22px;
@@ -64,6 +68,7 @@ footer {
 .top-spacer {
   background-color:#ffffff;
   height:40px;
+  margin-top: 10px;
 }
 
 a,a:hover {
