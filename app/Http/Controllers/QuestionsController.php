@@ -65,4 +65,11 @@ class QuestionsController extends Controller
 
         return redirect()->route('questions.show', $item->id);
     }
+
+    public function search()
+    {
+        $questions = $this->items->search(request()->input('q'));
+
+        return view('index', compact('questions'));
+    }
 }

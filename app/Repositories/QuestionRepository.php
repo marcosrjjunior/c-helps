@@ -21,6 +21,11 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		return Tag::find($tagId)->questions;
 	}
 
+	public function search($q)
+	{
+		return Question::where('title', 'LIKE', "%$q%")->get();
+	}
+
 	public function store($id, array $input)
 	{
 		return is_null($id) ? $this->create($input) : $this->update($id, $input);
