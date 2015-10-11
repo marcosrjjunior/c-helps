@@ -13,6 +13,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tagged/{tag}', ['as' => 'questions.tagged', 'uses' => 'QuestionsController@byTag']);
     });
 
+    Route::get('/search', ['as' => 'search', 'uses' => 'QuestionsController@search']);
+
     Route::group(['prefix' => 'answers'], function () {
         Route::post('submit', ['as' => 'answers.submit', 'uses' => 'AnswersController@submit']);
         Route::post('{id}/points/submit', ['as' => 'answers.points.submit', 'uses' => 'AnswersController@submitPoints']);

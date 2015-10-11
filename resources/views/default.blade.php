@@ -39,13 +39,15 @@
                             </div>
                         </li>
                         @endif
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
-                            <ul class="dropdown-menu" style="padding:12px;">
-                                <form class="form-inline">
-                                    <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
-                                </form>
-                            </ul>
+                        <li>
+                            <form method="get" action="{!! route('search') !!}" class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" name="q">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                            </form>
                         </li>
                     </ul>
                 </nav>
