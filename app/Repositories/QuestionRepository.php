@@ -94,7 +94,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		$client->to(env('SLACK_TO'))->attach([
 		    'fallback'    => 'New question created',
 		    'author_name' => $q->title,
-		    'author_link' => env('C-HELPS_URL') . '/questions/' . $q->id,
+		    'author_link' => url() . '/questions/' . $q->id,
 		    'author_icon' => $q->user->avatar,
 		    'color'       => '#010167',
 		    'pretext'     => 'New question created',
