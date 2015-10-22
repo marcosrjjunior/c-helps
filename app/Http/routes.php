@@ -29,5 +29,5 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('auth/github', ['as' => 'auth.github', 'uses' => 'Auth\AuthController@redirectToProvider']);
 Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
 
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
