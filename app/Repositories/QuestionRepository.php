@@ -17,9 +17,9 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		return Question::find($id);
 	}
 
-	public function byTag($tagId)
+	public function byTag($tagName)
 	{
-		return Tag::find($tagId)->questions;
+		return Tag::whereName($tagName)->first()->questions;
 	}
 
 	public function search($q)
