@@ -1,10 +1,10 @@
 @extends('default')
 
 @section('scripts')
-<script type="text/javascript" src="{!! asset('assets/select2/js/select2.min.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('assets/vuejs/js/vue.min.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('assets/marked/js/marked.min.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('js/editor.js') !!}"></script>
+<script type="text/javascript" src="{{ asset('assets/select2/js/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/vuejs/js/vue.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/marked/js/marked.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/editor.js') }}"></script>
 <script>
     $(function() {
         $('select').select2({
@@ -15,8 +15,8 @@
 @stop
 
 @section('styles')
-<link rel="stylesheet" href="{!! asset('assets/select2/css/select2.min.css') !!}">
-<link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
+<link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 @stop
 
 @section('page')
@@ -37,13 +37,13 @@
                     @endif
                     <div class="row">
                         <div class="col-md-9">
-                            <form method="post" action="{!! route('questions.submit') !!}">
-                                {!! csrf_field() !!}
+                            <form method="post" action="{{ route('questions.submit') }}">
+                                {{ csrf_field() }}
 
                                 <div class="form-group @if($errors->has('title')) has-error @endif">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" name="title" placeholder="What's your question? Be specific.">
-                                    {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+                                    {{ $errors->first('title', '<span class="help-block">:message</span>') }}
                                 </div>
 
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
@@ -52,14 +52,14 @@
                                         <textarea rows="8" v-model="text" debounce="100" name="text"></textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
-                                    {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
+                                    {{ $errors->first('text', '<span class="help-block">:message</span>') }}
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tags">Tags</label>
                                     <select type="text" class="form-control" name="tags[]" multiple>
                                         @foreach($tags as $tag)
-                                        <option>{!! $tag->name !!}</option>
+                                        <option>{{ $tag->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
