@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use Exception;
-use Guzzle\Http\Client;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Socialite;
@@ -77,16 +76,22 @@ class AuthController extends Controller
     public function verifyOrganization($organizationsUrl)
     {
         $companies = [];
-        $client = new Client();
-        $response = $client->get($organizationsUrl)->send();
 
-        if ( ! is_array($response->json())) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $organizationsUrl);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "User-Agent: env('GITHUB_ID')",
+        ));
+        $content = curl_exec($ch);
+
+        if ( ! is_array(json_decode($content))) {
             return false;
         }
 
         // Get organizations names
-        foreach($response->json() as $data) {
-            $companies[] = $data['login'];
+        foreach(json_decode($content) as $data) {
+            $companies[] = $data->login;
         }
 
         if (in_array(env('C-HELPS_COMPANY'), $companies)) {
