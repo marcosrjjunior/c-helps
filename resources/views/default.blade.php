@@ -33,8 +33,10 @@
                         @if(isset(auth()->user()->exists))
                         <li>
                             <div class="nav-avatar">
-                                <img src="{!! auth()->user()->avatar!!}">
-                                <label>{!! auth()->user()->points!!}</label>
+                                <a href="{!! route('users', auth()->user()->id) !!}">
+                                    <img src="{!! auth()->user()->avatar!!}">
+                                </a>
+                                <label>{!! auth()->user()->points !!}</label>
                             </div>
                         </li>
                         @endif
@@ -101,7 +103,7 @@
                         </ul>
                     </div>
                     <div class="col-sm-6">
-                        <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.bootply.com">Bootply</a></p>
+                        <p class="pull-right">Created by <a href="https://github.com/marcosrjjunior">@marcosrjjunior</a></p>
                     </div>
                 </div>
             </div>

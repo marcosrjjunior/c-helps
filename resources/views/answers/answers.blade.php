@@ -26,9 +26,7 @@
         <p>{!! \Michelf\MarkdownExtra::defaultTransform($answer->text) !!}</p>
         <div class="user-info pull-right">
             <p>answered {!! $answer->created_at->diffForHumans() !!}</p>
-            <img src="{!! isset($answer->user->exists) ? $answer->user->avatar : '' !!}">
-            <a href="">{!! isset($answer->user->exists) ? $answer->user->name : 'Deleted user' !!}</a>
-            <label class="pts">{!! isset($answer->user->exists) ? $answer->user->points : '0' !!}</label>
+            @include('users.info', ['item' => $answer])
         </div>
     </div>
 </div>

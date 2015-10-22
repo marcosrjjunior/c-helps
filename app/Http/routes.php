@@ -22,6 +22,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('{id}/update', ['as' => 'answers.update', 'uses' => 'AnswersController@update']);
         Route::delete('{id}/delete', ['as' => 'answers.delete', 'uses' => 'AnswersController@delete']);
     });
+
+    Route::get('users/{id}', ['as' => 'users', 'uses' => 'UsersController@show']);
 });
 
 Route::get('auth/github', ['as' => 'auth.github', 'uses' => 'Auth\AuthController@redirectToProvider']);
