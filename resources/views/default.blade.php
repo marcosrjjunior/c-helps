@@ -8,8 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{!! asset('css/default-styles.css') !!}">
-        <link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
+        <link rel="stylesheet" href="{{ asset('css/default-styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         @yield('styles')
     </head>
     <body>
@@ -26,22 +26,22 @@
                 <nav class="collapse navbar-collapse" role="navigation">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="{!! route('questions.ask') !!}">Ask Question</a>
+                            <a href="{{ route('questions.ask') }}">Ask Question</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-right navbar-nav">
                         @if(isset(auth()->user()->exists))
                         <li>
                             <div class="nav-avatar">
-                                <a href="{!! route('users', auth()->user()->id) !!}">
-                                    <img src="{!! auth()->user()->avatar!!}">
+                                <a href="{{ route('users', auth()->user()->id) }}">
+                                    <img src="{{ auth()->user()->avatar}}">
                                 </a>
-                                <label>{!! auth()->user()->points !!}</label>
+                                <label>{{ auth()->user()->points }}</label>
                             </div>
                         </li>
                         @endif
                         <li>
-                            <form method="get" action="{!! route('search') !!}" class="navbar-form" role="search">
+                            <form method="get" action="{{ route('search') }}" class="navbar-form" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search" name="q">
                                 <div class="input-group-btn">
@@ -69,7 +69,7 @@
                         <div class="well text-center">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h2>{!! env('C-HELPS_COMPANY') ? ucwords(env('C-HELPS_COMPANY')) : 'Your Company' !!}</h2>
+                                    <h2>{{ env('C-HELPS_COMPANY') ? ucwords(env('C-HELPS_COMPANY')) : 'Your Company' }}</h2>
                                 </div>
                             </div>
                         </div>
