@@ -37,5 +37,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\TagRepositoryInterface',
             'App\Repositories\TagRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\UserRepositoryInterface',
+            'App\Repositories\UserRepository'
+        );
     }
 }

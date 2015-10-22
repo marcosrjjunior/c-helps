@@ -39,7 +39,7 @@
                                 <h4>
                                     <small style="font-family:courier,'new courier';" class="text-muted">
                                         {!! $question->created_at->diffForHumans() !!}  •
-                                        <a href="">{!! isset($question->user->exists) ? $question->user->name : 'Deleted user' !!}</a>
+                                        @include('user', ['item' => $question])
                                     </small>
                                 </h4>
                             </div>

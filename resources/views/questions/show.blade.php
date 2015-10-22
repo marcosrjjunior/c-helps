@@ -96,9 +96,7 @@
                             </h4>
                             <div class="user-info pull-right">
                                 <p>asked {!! $question->created_at->diffForHumans() !!}</p>
-                                <img src="{!! isset($question->user->exists) ? $question->user->avatar : '' !!}">
-                                <a href="">{!! isset($question->user->exists) ? $question->user->name : 'Deleted user' !!}</a>
-                                <label class="pts">{!! isset($question->user->exists) ? $question->user->points : '0' !!}</label>
+                                @include('users.info', ['item' => $question])
                             </div>
                         </div>
                     </div>
