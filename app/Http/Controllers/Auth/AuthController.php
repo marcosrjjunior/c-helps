@@ -63,7 +63,7 @@ class AuthController extends Controller
         }
 
         if ( ! $this->verifyOrganization($user->user['organizations_url'])) {
-            return redirect()->back()->with('company_error', 'You must belong to this company!');
+            return redirect()->route('auth.login')->with('company_error', 'You must belong to this company!');
         }
 
         $authUser = $this->findOrCreateUser($user);

@@ -91,7 +91,9 @@
 
                             <h4>
                                 @foreach($question->tags as $tag)
-                                    <span class="label label-default">{{ $tag->name }}</span>
+                                    <a href="{{ route('questions.tagged', $tag->name) }}">
+                                        <span class="label label-default">{{ $tag->name }}</span>
+                                    </a>
                                 @endforeach
                             </h4>
                             <div class="user-info pull-right">
