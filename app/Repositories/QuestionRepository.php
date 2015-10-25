@@ -36,7 +36,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 	{
 		$q = new Question;
 		$q->title = $input['title'];
-		$q->text = $input['text'];
+		$q->text = strip_tags($input['text']);
 		$q->user_id = auth()->user()->id;
 		$q->save();
 
@@ -58,7 +58,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 			abort(403);
 		}
 
-		$q->text = $input['text'];
+		$q->text = strip_tags($input['text']);
 		$q->save();
 
 		return $q;
@@ -93,7 +93,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 
 		$client->to(env('SLACK_TO'))->attach([
 		    'fallback'    => 'New question created',
-		    'author_name' => $q->title,
+		    'author_name' => $q->getTitle(),
 		    'author_link' => url() . '/questions/' . $q->id,
 		    'author_icon' => $q->user->avatar,
 		    'color'       => '#010167',

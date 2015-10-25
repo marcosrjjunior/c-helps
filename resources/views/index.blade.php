@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-10 col-sm-9">
                             <a href="{{ route('questions.show', $question->id) }}">
-                                <h3>{{ $question->title }}</h3>
+                                <h3>{{ $question->getTitle() }}</h3>
                             </a>
                             <div class="row">
                             <div class="col-xs-9">
