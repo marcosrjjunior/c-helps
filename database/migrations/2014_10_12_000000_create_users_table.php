@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
 
             // Cached from GitHub
             $table->string('github_id')->unique();
+            $table->string('nickname');
             $table->string('avatar');
 
             $table->rememberToken();
