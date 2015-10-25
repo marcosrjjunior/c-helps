@@ -42,14 +42,14 @@
 
                                 <div class="form-group @if($errors->has('title')) has-error @endif">
                                     <label for="title">Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="What's your question? Be specific.">
+                                    <input type="text" class="form-control" name="title" placeholder="What's your question? Be specific." value="{{ old('title') }}">
                                     {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
                                     <label for="title">Text</label>
                                     <div id="editor">
-                                        <textarea rows="8" v-model="text" debounce="100" name="text"></textarea>
+                                        <textarea rows="8" v-model="text" debounce="100" name="text">{{ old('text') }}</textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}

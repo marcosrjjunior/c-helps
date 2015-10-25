@@ -39,4 +39,9 @@ class Question extends Model
         return count($this->answers);
     }
 
+    public function getTitle()
+    {
+        return strlen($this->title) > 90 ? substr($this->title, 0, 90).'...' : $this->title;
+    }
+
 }
