@@ -78,14 +78,6 @@
                                 <span data-item="{{ $question->id }}" class="label label-default delete-question">delete</span>
                             </div>
                             @endcan
-                            @if ($errors->has())
-                                <div class="alert alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    @foreach ($errors->all() as $error)
-                                    {!! $error !!}<br>
-                                    @endforeach
-                                </div>
-                            @endif
 
                             <p>{!! \Michelf\MarkdownExtra::defaultTransform($question->text) !!}</p>
 
@@ -111,6 +103,14 @@
 
                     <div class="row">
                         <div class="col-md-9">
+                            @if ($errors->has())
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    @foreach ($errors->all() as $error)
+                                    {!! $error !!}<br>
+                                    @endforeach
+                                </div>
+                            @endif
                             <form method="post" action="{{ route('answers.submit') }}">
                                 {!! csrf_field() !!}
 
@@ -122,7 +122,7 @@
                                         <textarea rows="8" v-model="text" debounce="100" name="text"></textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
-                                    {{ $errors->first('text', '<span class="help-block">:message</span>') }}
+                                    {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Post Your Answer</button>

@@ -12,7 +12,9 @@ class QuestionRequest extends Request {
     public function rules()
     {
         return [
-            // 'answer' => 'required',
+            'title' => 'required|min:7',
+            'text'  => 'required|min:10',
+            'tags'  => 'required',
         ];
     }
 
