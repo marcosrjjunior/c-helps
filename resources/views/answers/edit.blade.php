@@ -38,7 +38,7 @@
                                         <textarea rows="8" v-model="text" debounce="100" name="text">{{ $answer->text }}</textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
-                                    {{ $errors->first('text', '<span class="help-block">:message</span>') }}
+                                    {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Edit Your Answer</button>

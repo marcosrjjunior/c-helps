@@ -43,7 +43,7 @@
                                 <div class="form-group @if($errors->has('title')) has-error @endif">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" name="title" placeholder="What's your question? Be specific.">
-                                    {{ $errors->first('title', '<span class="help-block">:message</span>') }}
+                                    {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <div class="form-group @if($errors->has('text')) has-error @endif">
@@ -52,7 +52,7 @@
                                         <textarea rows="8" v-model="text" debounce="100" name="text"></textarea>
                                         <div v-html="text | marked"></div>
                                     </div>
-                                    {{ $errors->first('text', '<span class="help-block">:message</span>') }}
+                                    {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <div class="form-group">
@@ -62,6 +62,7 @@
                                         <option>{{ $tag->name }}</option>
                                         @endforeach
                                     </select>
+                                    {!! $errors->first('tags', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Post Your Question</button>
