@@ -34,12 +34,12 @@
                         <div class="col-md-8">
                             <div>
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">Questions</a></li>
-                                    <li role="presentation"><a href="#answers" aria-controls="answers" role="tab" data-toggle="tab">Answers</a></li>
+                                    <li class="active"><a href="#questions" id="questions-tab" role="tab" data-toggle="tab" aria-controls="questions" aria-expanded="true">Questions</a></li>
+                                    <li role="presentation"><a href="#answers" role="tab" id="answers-tab" data-toggle="tab" aria-controls="answers" aria-expanded="false">Answers</a></li>
                                 </ul>
 
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane" id="questions">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="questions">
                                         <table class="table">
                                             <tbody>
                                                 @foreach($user->questions as $question)

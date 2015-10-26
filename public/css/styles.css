@@ -29,6 +29,10 @@
     color: #f66;
 }
 
+#editor img {
+    width: 100%;
+}
+
 .point {
     cursor: pointer;
     color: #8E8E8E;
