@@ -9,8 +9,8 @@
         $('.point').on('click', function(e) {
             e.preventDefault();
 
-            var $this   = $(this);
-                $answer = $this.closest('[data-id]'),
+            var $this    = $(this);
+                $answer  = $this.closest('[data-id]'),
                 $point   = $this.data('point');
 
             $.ajax({
@@ -18,35 +18,43 @@
                 method: 'POST',
                 url: '/answers/'+$answer.data('id')+'/points/submit',
                 data: { point: $point },
-                success : function(data)
-                {
+                success : function(data) {
                     $answer.find('.points').text(data.points);
                 },
-                error: function(data)
-                {
+                error: function(data) {
                     alert('Try vote for another answer or you already voted for this answer');
                 }
             });
         });
 
+        $('.delete-question').on('click', function(e) {
+            e.preventDefault();
+
+            if ( ! confirm('Are you sure?')) return;
+
+            deleteByType('questions', $(this).data('item'));
+
+            window.location.href = "{!! url() !!}/questions/";
+        });
+
         $('.delete-answer').on('click', function(e) {
             e.preventDefault();
 
-            if (!confirm('Are you sure?')) return;
+            if ( ! confirm('Are you sure?')) return;
 
-            var $this = $(this),
-                $id   = $this.data('item');
+            deleteByType('answers', $(this).data('item'));
 
+            window.location.href = "{!! url() !!}/questions/"+$(this).data('question');
+        });
+
+        deleteByType = function(type, id) {
             $.ajax({
                 headers: {'X-CSRF-TOKEN' : '{!! csrf_token() !!}'},
                 method: 'DELETE',
-                url: '/answers/'+$id+'/delete',
-                success : function(data)
-                {
-                    $this.closest('[data-id]').remove();
-                }
+                url: '/answers/'+id+'/delete',
+                success : function(data) {}
             });
-        });
+        }
 
     });
 </script>
@@ -75,7 +83,7 @@
                                     <span class="label label-default">edit</span>
                                 </a>
 
-                                <span data-item="{{ $question->id }}" class="label label-default delete-question">delete</span>
+                                <span data-item="{{ $question->id }}" class="label label-default cursor-pointer delete-question">delete</span>
                             </div>
                             @endcan
 

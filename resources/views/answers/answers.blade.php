@@ -20,7 +20,7 @@
                 <span class="label label-default">edit</span>
             </a>
 
-            <span data-item="{{ $answer->id }}" class="label label-default delete-answer">delete</span>
+            <span data-item="{{ $answer->id }}" data-question="{{ $answer->question->id }}" class="label label-default cursor-pointer delete-answer">delete</span>
         </div>
         @endcan
         <p>{!! \Michelf\MarkdownExtra::defaultTransform($answer->text) !!}</p>
