@@ -52,6 +52,7 @@
                     @endforeach
                     <!--/stories-->
 
+                    {!! $questions->render() !!}
                 </div>
             </div>
 

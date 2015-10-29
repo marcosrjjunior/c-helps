@@ -12,6 +12,11 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		return Question::all();
 	}
 
+	public function paginate($perPage)
+	{
+		return Question::paginate($perPage);
+	}
+
 	public function find($id)
 	{
 		return Question::find($id);
@@ -73,12 +78,13 @@ class QuestionRepository implements QuestionRepositoryInterface {
 
 	public function delete($id)
 	{
-		if($q = Question::find($id))
-		{
-			return $q->delete();
+		$q = Question::find($id);
+
+		if (Gate::denies('update', $q)) {
+			abort(403);
 		}
 
-		return false;
+		$q->delete();
 	}
 
 	public function slackMessage($q)

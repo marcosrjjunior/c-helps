@@ -26,7 +26,7 @@ class QuestionsController extends Controller
 
     public function index()
     {
-        $questions = $this->items->all();
+        $questions = $this->items->paginate(15);
 
         return view('index', compact('questions'));
     }
@@ -64,6 +64,11 @@ class QuestionsController extends Controller
         $item = $this->items->update($request->id, $request->input());
 
         return redirect()->route('questions.show', $item->id);
+    }
+
+    public function delete($id)
+    {
+        return $this->items->delete($id);
     }
 
     public function search()

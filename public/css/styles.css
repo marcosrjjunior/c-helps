@@ -78,3 +78,7 @@
 .tags a:focus {
     text-decoration: none;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
