@@ -10,7 +10,7 @@ After that, create a new webhook slack service, visit [Slack New Webhook](https:
 
 Finally fill the informations in the .env file
 
-````php
+````
 GITHUB_ID=XXXXX
 GITHUB_SECRET=XXXXXXXXXXXXXXXXXX
 GITHUB_CALLBACK_URL=http://XXXXXXX/auth/github/callback
@@ -21,3 +21,17 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXX/XXX/XXX
 SLACK_TO=#general //#channel or @direct messages
 SLACK_ICON=:ghost: //slack icons or img
 ````
+
+````
+composer install
+vendor/bin/homestead make
+vagrant up
+.../vagrant php artisan migrate
+````
+
+## Screenshots
+<a href="#"><img width="728" src="https://cloud.githubusercontent.com/assets/5287262/11325773/c229188c-913d-11e5-9b30-d164daeec23b.png" alt="c-helps"></a>
+
+<a href="#"><img width="728" src="https://cloud.githubusercontent.com/assets/5287262/11325774/c5254fba-913d-11e5-86c4-f628570afb8b.png" alt="c-helps"></a>
+
+<a href="#"><img width="728" src="https://cloud.githubusercontent.com/assets/5287262/11325776/c9def434-913d-11e5-8141-74d26b5bda18.png" alt="c-helps"></a>
