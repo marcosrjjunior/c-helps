@@ -1,9 +1,21 @@
 @extends('default')
 
 @section('scripts')
+<script type="text/javascript" src="{{ asset('assets/select2/js/select2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/vuejs/js/vue.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/marked/js/marked.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/editor.js') }}"></script>
+<script>
+    $(function() {
+        $('select').select2({
+            tags: true
+        });
+    });
+</script>
+@stop
+
+@section('styles')
+<link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css') }}">
 @stop
 
 @section('page')
@@ -45,6 +57,16 @@
                                         <div v-html="text | marked"></div>
                                     </div>
                                     {!! $errors->first('text', '<span class="help-block">:message</span>') !!}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tags">Tags</label>
+                                    <select type="text" class="form-control" name="tags[]" multiple>
+                                        @foreach($tags as $tag)
+                                        <option {{ in_array($tag->id, $question->tags->modelKeys()) ? ' selected="selected"' : ''}}>{{ $tag->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    {!! $errors->first('tags', '<span class="help-block">:message</span>') !!}
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Edit Your Question</button>
