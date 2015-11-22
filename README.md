@@ -30,7 +30,7 @@ vagrant up
 ````
 
 ## Screenshots
-<a href="#"><img width="728" src="https://cloud.githubusercontent.com/assets/5287262/11325773/c229188c-913d-11e5-9b30-d164daeec23b.png" alt="c-helps"></a>
+<a href="#"><img width="728" src="https://cloud.githubusercontent.com/assets/5287262/11325827/4af65494-913f-11e5-9941-6f743c25b57b.png" alt="c-helps"></a>
 
 <a href="#"><img width="728" src="https://cloud.githubusercontent.com/assets/5287262/11325774/c5254fba-913d-11e5-86c4-f628570afb8b.png" alt="c-helps"></a>
 
