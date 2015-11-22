@@ -55,8 +55,9 @@ class QuestionsController extends Controller
     public function edit($id)
     {
         $question = $this->items->find($id);
+        $tags = $this->tags->all();
 
-        return view('questions.edit', compact('question'));
+        return view('questions.edit', compact('question', 'tags'));
     }
 
     public function update(QuestionRequest $request)
