@@ -4,8 +4,11 @@ use App\Question;
 use App\Tag;
 use Gate;
 use Maknz\Slack\Client;
+use App\Http\Traits\HelperTrait;
 
 class QuestionRepository implements QuestionRepositoryInterface {
+
+	use HelperTrait;
 
 	public function all()
 	{
@@ -41,7 +44,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 	{
 		$q = new Question;
 		$q->title = $input['title'];
-		$q->text = strip_tags($input['text']);
+		$q->text = $this->replaceTags($input['text']);
 		$q->user_id = auth()->user()->id;
 		$q->save();
 
@@ -63,7 +66,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 			abort(403);
 		}
 
-		$q->text = strip_tags($input['text']);
+		$q->text = $this->replaceTags($input['text']);
 		$q->save();
 
 		return $q;
