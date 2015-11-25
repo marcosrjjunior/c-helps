@@ -2,8 +2,11 @@
 
 use Gate;
 use App\Answer;
+use App\Http\Traits\HelperTrait;
 
 class AnswerRepository implements AnswerRepositoryInterface {
+
+	use HelperTrait;
 
 	public function all()
 	{
@@ -23,7 +26,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
 	public function create(array $input)
 	{
 		$a = new Answer;
-		$a->text = strip_tags($input['text']);
+		$a->text = $this->replaceTags($input['text']);
 		$a->question_id = $input['question_id'];
 		$a->user_id = auth()->user()->id;
 		$a->save();
@@ -39,7 +42,7 @@ class AnswerRepository implements AnswerRepositoryInterface {
 			abort(403);
 		}
 
-		$a->text = strip_tags($input['text']);
+		$a->text = $this->replaceTags($input['text']);
 		$a->save();
 
 		return $a;
