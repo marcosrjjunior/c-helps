@@ -15,6 +15,7 @@ GITHUB_ID=XXXXX
 GITHUB_SECRET=XXXXXXXXXXXXXXXXXX
 GITHUB_CALLBACK_URL=http://XXXXXXX/auth/github/callback
 
+GITHUB_ONLY_COMPANY=false // true: you'll can access if you belongs to a company. Company needs to be public in your profile
 C-HELPS_COMPANY=name of your company, just like in the github (slug)
 
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXX/XXX/XXX
