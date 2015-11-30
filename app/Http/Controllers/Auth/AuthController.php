@@ -62,7 +62,7 @@ class AuthController extends Controller
             return redirect('auth/github');
         }
 
-        if ( ! $this->verifyOrganization($user->user['organizations_url'])) {
+        if (env('GITHUB_ONLY_COMPANY') && ! $this->verifyOrganization($user->user['organizations_url'])) {
             return redirect()->route('auth.login')->with('company_error', 'You must belong to this company!');
         }
 

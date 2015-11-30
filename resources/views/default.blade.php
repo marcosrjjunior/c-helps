@@ -30,7 +30,12 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-right navbar-nav">
-                        @if(isset(auth()->user()->exists))
+                        @if (isset(auth()->user()->exists))
+                        <li>
+                            <a href="{{ route('auth.logout') }}">
+                                <span>Logout</span>
+                            </a>
+                        </li>
                         <li>
                             <div class="nav-avatar">
                                 <a href="{{ route('users', auth()->user()->id) }}">
@@ -42,12 +47,12 @@
                         @endif
                         <li>
                             <form method="get" action="{{ route('search') }}" class="navbar-form" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" name="q">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="q">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
                                 </div>
-                            </div>
                             </form>
                         </li>
                     </ul>

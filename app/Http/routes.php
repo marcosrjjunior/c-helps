@@ -31,4 +31,4 @@ Route::get('auth/github', ['as' => 'auth.github', 'uses' => 'Auth\AuthController
 Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
 
 Route::get('auth/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout']);
