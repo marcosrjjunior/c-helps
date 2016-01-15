@@ -2,7 +2,7 @@
 
 > Q&A for a specific github's company. Slack integration. Inspired by the stackoverflow.
 
-## Setup
+## Setup (Laravel 5.2)
 
 First, create a new github app, visit [GitHub's New Application page](https://github.com/settings/applications/new), fill out the form, and grab your client ID, secret and callback URL.
 

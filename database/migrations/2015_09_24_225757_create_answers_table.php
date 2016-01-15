@@ -21,7 +21,7 @@ class CreateAnswersTable extends Migration
 
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
 
         Schema::create('answers_points_user', function (Blueprint $table) {
