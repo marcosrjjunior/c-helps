@@ -48,8 +48,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 		$q->user_id = auth()->user()->id;
 		$q->save();
 
-		if ($input['tags'])
-		{
+		if ($input['tags']) {
 			$this->saveTags($q, $input['tags']);
 		}
 
@@ -66,8 +65,13 @@ class QuestionRepository implements QuestionRepositoryInterface {
 			abort(403);
 		}
 
+		$q->title = $input['title'];
 		$q->text = $this->replaceTags($input['text']);
 		$q->save();
+
+		if ($input['tags']) {
+			$this->saveTags($q, $input['tags']);
+		}
 
 		return $q;
 	}
@@ -76,7 +80,7 @@ class QuestionRepository implements QuestionRepositoryInterface {
 	{
 		$tags = app('App\Repositories\TagRepositoryInterface')->hasTagsOrCreate($tags);
 
-		$model->tags()->attach($tags);
+		$model->tags()->sync($tags);
 	}
 
 	public function delete($id)
